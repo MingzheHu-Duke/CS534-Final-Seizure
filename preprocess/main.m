@@ -45,37 +45,32 @@ title('output signal');
 
 %% loop all files
 
+% change foldre before tun
 folder = "../../";
 
-outfile = fullfile(folder,"output.csv";
+outfile_name = fullfile(folder,"output.csv");
+% outfile = open(outfile_name);
 
-T = table(); 
+
+
 tempTable = table();
 %loop over subjects
 subjects=dir(folder);
 for s = 1:length(subjects)
     fprintf("Subject %s\n",subjects(s).name)
     segments=dir(fullfile(folder,subjects(s).name,"*.mat" ));
+    residual_data = [];
+    %loop over segments/files/10min
     for k = 1:length(segments)
         fprintf("\tSegment %s\n",segments(k).name)
+        % skip test files. 
+        % hhh
+        
         segname=segments(k).name;
         fpath_full = fullfile(folder,subjects(s).name,segname);
         
-        
-        outcome = tremor_analysis(...
-            'fname', fpath+fpath_full,...
-            'markername', 'L.Finger3.M3', 'plot_flag', 0);
-        
-        tempTable.record_id = icd.id(line); 
-        tempTable.file = fpath_full; 
-        tempTable.icd = icd.icd(line); 
-        tempTable.markername = {'L.Finger3.M3'}; 
-        tempTable.max_p = outcome(1);
-        tempTable.f_max_p = outcome(2);
-        tempTable.f_sd = outcome(3);
-        tempTable.rms_power = outcome(4);
-        T = [T;tempTable];
+        [features, residual_data] = get_features(fpath_full,residual_data,plot_flag=0);
+        write_features(outfile,features);
     end
+
 end
-%write to file.
-writetable(T,outfile)
