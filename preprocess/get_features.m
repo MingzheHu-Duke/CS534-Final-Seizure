@@ -20,4 +20,9 @@ function [features, residual_data] = get_features(fname, residual_data, plot_fla
 %   corr
 %   corr-eigen
 %   mean, abs(mean), std,rms, kurtosis, skewness
+CorrelationTemp(version_temp)
+    
+    
+
+
 % return features as a struct / vector
