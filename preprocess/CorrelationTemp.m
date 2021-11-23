@@ -14,7 +14,7 @@ mCorrs_T(5,:) = D
 
 
 %calculate summary feature
-mCorrs_T(6,:) = reshapemean(data);
+mCorrs_T(6,:) = mean(data);
 mCorrs_T(7,:) = mean(abs(data));
 mCorrs_T(8,:) = std(data);
 mCorrs_T(9,:) = sum(data);
