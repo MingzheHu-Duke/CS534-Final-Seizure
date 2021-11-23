@@ -44,7 +44,7 @@ for windowend=max_window:min_window:dlength
         mCorrs_T = CorrelationTemp(dataseg);
         freq_feature_list = get_f_feature(dataseg, segment.sampling_frequency, size(segment.channels, 2), plot_flag);
         % assign feature values to features.
-        % features = 
+        features = [mCorrs_T, freq_feature_list];
     end
 end
 residual_data = segment.data(:,windowend:end);
