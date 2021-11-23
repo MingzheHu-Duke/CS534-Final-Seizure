@@ -3,34 +3,34 @@ clc;clear;close all;
 %% random test
 
 
-signal = data(1,:);
-
-N_clear = 150;
-
-% Remove the calls to fftshift, if you want to delete the lower frequency components
-S = fftshift(fft(signal));   
-S_cleared = S;
-S_cleared(1:N_clear) = 0;
-S_cleared(end-N_clear+2:end) = 0;
-S_cleared = fftshift(S_cleared);
-
-signal_cleared = ifft(S_cleared);
-
-subplot(2,2,1);
-plot(signal);
-title('input signal');
-
-subplot(2,2,2);
-plot(abs(S));
-title('input spectrum');
-
-subplot(2,2,3);
-plot(abs(fftshift(S_cleared)));
-title('output spectrum');
-
-subplot(2,2,4);
-plot(signal_cleared);
-title('output signal');
+% signal = data(1,:);
+% 
+% N_clear = 150;
+% 
+% % Remove the calls to fftshift, if you want to delete the lower frequency components
+% S = fftshift(fft(signal));   
+% S_cleared = S;
+% S_cleared(1:N_clear) = 0;
+% S_cleared(end-N_clear+2:end) = 0;
+% S_cleared = fftshift(S_cleared);
+% 
+% signal_cleared = ifft(S_cleared);
+% 
+% subplot(2,2,1);
+% plot(signal);
+% title('input signal');
+% 
+% subplot(2,2,2);
+% plot(abs(S));
+% title('input spectrum');
+% 
+% subplot(2,2,3);
+% plot(abs(fftshift(S_cleared)));
+% title('output spectrum');
+% 
+% subplot(2,2,4);
+% plot(signal_cleared);
+% title('output signal');
 % [b, a] = butter(2,[0.5 47]/(freq/2));
 
 
@@ -50,8 +50,12 @@ folder = "../../";
 
 outfile_name = fullfile(folder,"output.csv");
 % outfile = open(outfile_name);
-
-
+fileindex_ = 0;
+while exist(outfile_name, 'file')
+    fileindex_ = fileindex_ + 1;
+    outfile_name = fullfile(folder,"output_"+fileindex_+".csv");
+end
+writematrix(M2,outfile_name,'WriteMode','append')
 
 tempTable = table();
 %loop over subjects
