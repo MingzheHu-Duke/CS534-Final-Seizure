@@ -55,7 +55,7 @@ while exist(outfile_name, 'file')
     fileindex_ = fileindex_ + 1;
     outfile_name = fullfile(folder,"output_"+fileindex_+".csv");
 end
-writematrix(M2,outfile_name,'WriteMode','append')
+% writematrix(feature_names,outfile_name)
 
 tempTable = table();
 %loop over subjects
@@ -77,7 +77,7 @@ for s = 1:length(subjects)
         fpath_full = fullfile(folder,subjects(s).name,segname);
         
         [features, residual_data] = get_features(fpath_full,residual_data,plot_flag=0);
-        write_features(outfile,features);
+        writematrix(features,outfile_name,'WriteMode','append')
     end
 
 end
