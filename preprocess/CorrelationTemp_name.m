@@ -1,11 +1,11 @@
 function mCorrs_T_name = CorrelationTemp_name()
 
 nChans = 16;
-mCorrs_T_name = []
+mCorrs_T_name = [];
 
 
 for i = 1:nChans    
-    mCorrs_T_name=[mCorrs_T_name,'T_corrs_mean'+i];
+    mCorrs_T_name=[mCorrs_T_name,"T_corrs_mean"+i];
 end
 
 
