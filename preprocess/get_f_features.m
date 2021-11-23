@@ -7,7 +7,7 @@ function freq_feature_list = get_f_features(data_segment, sampling_frequency, ch
     % 
     
     % Butterworth filter
-    y_td = butterfiltfilt(data, [1, 47], 400);
+    y_td = data;
     % Store the frequency domain data
     filtered_fft = zeros(size(y_td));
     % Store the single side amplitude spectrum
