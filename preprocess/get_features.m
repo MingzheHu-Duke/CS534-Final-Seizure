@@ -35,7 +35,7 @@ for windowend=max_window:max_window:dlength
     for window_len = window_lengths
         dataseg = segment.data(windowend-window_len:windowend,:);
         dataseg = butterfiltfilt(dataseg,[1,50],segment.sampling_frequency);
-        [mCorrs_T, names_mCorrs_T, matirx_sum_T, names_sum_T] = CorrelationTemp(dataseg);
+        [mCorrs_T] = CorrelationTemp(dataseg);
         % assign feature values to features.
         % features = 
     end
