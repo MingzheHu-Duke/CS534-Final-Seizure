@@ -4,46 +4,53 @@ nChans = 16;
 mCorrs_T_name = []
 
 
-for i in 1:nChans    
-    mCorrs_T_name=append(mCorrs_T_name,"T_corrs_mean"+i);
+for i = 1:nChans    
+    mCorrs_T_name=[mCorrs_T_name,'T_corrs_mean'+i];
 end
 
-for i in 1:nChans    
-    mCorrs_T_name=append(mCorrs_T_name,"T_corrs_std"+i);
+
+for i = 1:nChans    
+    mCorrs_T_name=[mCorrs_T_name,"T_corrs_std"+i];
 end
 
-for i in 1:nChans    
-    mCorrs_T_name=append(mCorrs_T_name,"T_corrs_sum"+i);
+for i = 1:nChans   
+    mCorrs_T_name=[mCorrs_T_name,"T_corrs_sum"+i];
 end
 
-for i in 1:nChans    
-    mCorrs_T_name=append(mCorrs_T_name,"T_corrs_abs_sum"+i);
+for i = 1:nChans    
+    mCorrs_T_name=[mCorrs_T_name,"T_corrs_abs_sum"+i];
 end
 
-for i in 1:nChans    
-    mCorrs_T_name=append(mCorrs_T_name,"T_mean"+i);
+for i = 1:nChans    
+    mCorrs_T_name=[mCorrs_T_name,"T_corrs_D"+i];
 end
 
-for i in 1:nChans    
-    mCorrs_T_name=append(mCorrs_T_name,"T_abs_mean"+i);
+for i = 1:nChans    
+    mCorrs_T_name=[mCorrs_T_name,"T_mean"+i];
 end
 
-for i in 1:nChans    
-    mCorrs_T_name=append(mCorrs_T_name,"T_std"+i);
+for i = 1:nChans    
+    mCorrs_T_name=[mCorrs_T_name,"T_abs_mean"+i];
 end
 
-for i in 1:nChans    
-    mCorrs_T_name=append(mCorrs_T_name,"T_sum"+i);
+for i = 1:nChans    
+    mCorrs_T_name=[mCorrs_T_name,"T_std"+i];
 end
 
-for i in 1:nChans    
-    mCorrs_T_name=append(mCorrs_T_name,"T_rms"+i);
+for i = 1:nChans   
+    mCorrs_T_name=[mCorrs_T_name,"T_sum"+i];
 end
 
-for i in 1:nChans    
-    mCorrs_T_name=append(mCorrs_T_name,"T_kurtosis"+i);
+for i = 1:nChans   
+    mCorrs_T_name=[mCorrs_T_name,"T_rms"+i];
 end
 
-for i in 1:nChans    
-    mCorrs_T_name=append(mCorrs_T_name,"T_skewness"+i);
+for i = 1:nChans    
+    mCorrs_T_name=[mCorrs_T_name,"T_kurtosis"+i];
 end
+
+for i = 1:nChans   
+    mCorrs_T_name=[mCorrs_T_name,"T_skewness"+i];
+end
+
+
