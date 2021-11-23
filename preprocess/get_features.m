@@ -42,6 +42,7 @@ for windowend=max_window:min_window:dlength
         dataseg = segment.data(windowend-window_len:windowend,:);
         dataseg = butterfiltfilt(dataseg,[1,50],segment.sampling_frequency);
         mCorrs_T = CorrelationTemp(dataseg);
+        freq_feature_list = get_f_feature(dataseg, segment.sampling_frequency, size(segment.channels, 2), plot_flag);
         % assign feature values to features.
         % features = 
     end
