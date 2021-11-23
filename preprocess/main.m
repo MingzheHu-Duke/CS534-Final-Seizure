@@ -63,10 +63,13 @@ for s = 1:length(subjects)
     %loop over segments/files/10min
     for k = 1:length(segments)
         fprintf("\tSegment %s\n",segments(k).name)
-        % skip test files. 
-        % hhh
-        
         segname=segments(k).name;
+        % skip test files. 
+        [ftype, istest] = get_type(segname);
+        if istest
+            continue
+        end
+
         fpath_full = fullfile(folder,subjects(s).name,segname);
         
         [features, residual_data] = get_features(fpath_full,residual_data,plot_flag=0);
