@@ -1,4 +1,4 @@
-function [mCorrs_T] = CorrelationTemp(data)
+function mCorrs_T = CorrelationTemp(data)
 
 nChans = 16;
 
