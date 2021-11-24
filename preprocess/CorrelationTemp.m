@@ -4,13 +4,13 @@ nChans = 16;
 
 %calculate corr
 corrs = corr(data);
-[V,D] = eig(corrs);
+corr_eig = eig(corrs);
 mCorrs_T = []
 mCorrs_T(1,:) = mean(corrs);
 mCorrs_T(2,:) = std(corrs);
 mCorrs_T(3,:) = sum(corrs);
 mCorrs_T(4,:) = sum(abs(corrs));
-mCorrs_T(5,:) = D;
+mCorrs_T(5,:) = corr_eig;
 
 
 %calculate summary feature
