@@ -76,9 +76,10 @@ for k = 1:length(segments)
         class_preictal = 1*(ftype == "preictal");
 
         [features, residual_data] = get_features(fpath_full,fieldname,...
-            residual_data,outfile_name,class_preictal,0);
+            residual_data,outfile_name,class_preictal,false);
     catch
         fprintf("\tERROR!!")
     end
     
 end
+fprintf('\n');

@@ -29,7 +29,7 @@ if segment.sequence == 1
 end
 
 segment.data = [residual_data segment.data];
-size(segment.data)
+% size(segment.data)
 % TODO: get total number of feature
 % features = zeros([1,512]);
 

@@ -40,9 +40,9 @@ function freq_feature_list = get_f_features(segment, dataseg, plot_flag)
     %%
     % Compute the corraltion matrix
     corrs = corr(P1_data');
-    figure
     % Visualize the matrix
     if plot_flag
+        figure
         imagesc(corrs)
         xlabel("nth Channel")
         ylabel("nth Channel")
