@@ -65,7 +65,7 @@ for k = 1:length(segments)
         % skip test files. 
         [ftype, istest, subj_name, fieldname] = get_type(segname);
 
-        outfile_name = get_filename(folder,subj_name,".csv");
+        outfile_name = fullfile(folder,subj_name+".csv");
 
         if istest
             fprintf("test")
