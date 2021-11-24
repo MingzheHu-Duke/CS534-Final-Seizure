@@ -46,34 +46,35 @@ clc;clear;close all;
 %% loop all files
 
 % change foldre before tun
-folder = "../../";
+folder = "~/Downloads/seizure_pred/";
 
-outfile_name = get_filename(folder,output,".csv");
+% outfile_name = get_filename(folder,output,".csv");
 
 % writematrix(feature_names,outfile_name)
 
-tempTable = table();
 %loop over subjects
-subjects=dir(folder);
-for s = 1:length(subjects)
-    fprintf("Subject %s\n",subjects(s).name)
-    segments=dir(fullfile(folder,subjects(s).name,"*.mat" ));
-    residual_data = [];
-    %loop over segments/files/10min
-    for k = 1:length(segments)
-        fprintf("\tSegment %s\n",segments(k).name)
-        segname=segments(k).name;
-        % skip test files. 
-        [ftype, istest] = get_type(segname);
-        if istest
-            continue
-        end
-
-        fpath_full = fullfile(folder,subjects(s).name,segname);
-        
-        [features, residual_data] = get_features(fpath_full,residual_data,plot_flag=0);
-        features = [,ftype,features];
-        writematrix(features,outfile_name,'WriteMode','append')
+% outfile_name = get_filename(folder,subjects(s).name,".csv");
+segments=dir(fullfile(folder,"*","*.mat" ));
+residual_data = [];
+%loop over segments/files/10min
+for k = 1:length(segments)
+    fprintf("\tSegment %s\n",segments(k).name)
+    segname=segments(k).name;
+    segfolder = segments(k).folder;
+    % skip test files. 
+    [ftype, istest, subj_name, fieldname] = get_type(segname);
+    
+    outfile_name = get_filename(folder,subj_name,".csv");
+    
+    if istest
+        fprintf("test")
+        continue
     end
 
+    fpath_full = fullfile(segfolder,segname);
+    class_preictal = 1*(ftype == "preictal");
+
+    [features, residual_data] = get_features(fpath_full,fieldname,...
+        residual_data,outfile_name,class_preictal,0);
+    
 end

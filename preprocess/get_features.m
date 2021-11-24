@@ -1,4 +1,4 @@
-function [features, residual_data] = get_features(fname, residual_data, plot_flag)
+function [features, residual_data] = get_features(fname, fieldname, residual_data,outfile_name,ictal, plot_flag)
 
 % open file
 % slide windows 
@@ -21,6 +21,7 @@ function [features, residual_data] = get_features(fname, residual_data, plot_fla
 %   corr-eigen
 %   mean, abs(mean), std,rms, kurtosis, skewness
 segment = load(fname);
+segment = segment.(fieldname);
 % data -> 16 * 2xxxxxxxxx
 
 if segment.sequence == 1
@@ -30,21 +31,25 @@ end
 segment.data = [residual_data segment.data];
 
 % TODO: get total number of feature
-features = zeros([1,512]);
+% features = zeros([1,512]);
 
-dlength = size(segment.data, 1);
+dlength = size(segment.data, 2);
 window_lengths = [80,160,240];
 max_window = max(window_lengths);
 min_window = min(window_lengths);
 
 for windowend=max_window:min_window:dlength
     for window_len = window_lengths
-        dataseg = segment.data(windowend-window_len:windowend,:);
+        dataseg = segment.data(:,windowend-window_len:windowend);
         dataseg = butterfiltfilt(dataseg,[1,50],segment.sampling_frequency);
         mCorrs_T = CorrelationTemp(dataseg);
         % assign feature values to features.
-        % features = 
+        features = [ictal, mCorrs_T];
+        writematrix(features,outfile_name,'WriteMode','append')
     end
+end
+
+if plot_flag
 end
 residual_data = segment.data(:,windowend:end);
 
