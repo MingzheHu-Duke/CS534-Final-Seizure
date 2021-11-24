@@ -1,6 +1,6 @@
 function mCorrs_T = CorrelationTemp(data)
 
-nChans = 16;
+nChans = size(data,1);
 
 %calculate corr
 corrs = corr(data');
