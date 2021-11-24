@@ -58,23 +58,27 @@ segments=dir(fullfile(folder,"*","*.mat" ));
 residual_data = [];
 %loop over segments/files/10min
 for k = 1:length(segments)
-    fprintf("\tSegment %s\n",segments(k).name)
-    segname=segments(k).name;
-    segfolder = segments(k).folder;
-    % skip test files. 
-    [ftype, istest, subj_name, fieldname] = get_type(segname);
-    
-    outfile_name = get_filename(folder,subj_name,".csv");
-    
-    if istest
-        fprintf("test")
-        continue
+    try
+        fprintf("\nSegment %s",segments(k).name)
+        segname=segments(k).name;
+        segfolder = segments(k).folder;
+        % skip test files. 
+        [ftype, istest, subj_name, fieldname] = get_type(segname);
+
+        outfile_name = get_filename(folder,subj_name,".csv");
+
+        if istest
+            fprintf("test")
+            continue
+        end
+
+        fpath_full = fullfile(segfolder,segname);
+        class_preictal = 1*(ftype == "preictal");
+
+        [features, residual_data] = get_features(fpath_full,fieldname,...
+            residual_data,outfile_name,class_preictal,0);
+    catch
+        fprintf("\tERROR!!")
     end
-
-    fpath_full = fullfile(segfolder,segname);
-    class_preictal = 1*(ftype == "preictal");
-
-    [features, residual_data] = get_features(fpath_full,fieldname,...
-        residual_data,outfile_name,class_preictal,0);
     
 end
