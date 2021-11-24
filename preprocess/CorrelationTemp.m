@@ -3,7 +3,7 @@ function mCorrs_T = CorrelationTemp(data)
 nChans = 16;
 
 %calculate corr
-corrs = corr(data);
+corrs = corr(data');
 corr_eig = eig(corrs);
 mCorrs_T = []
 mCorrs_T(1,:) = mean(corrs);
