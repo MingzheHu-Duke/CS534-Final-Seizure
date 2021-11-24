@@ -1,4 +1,4 @@
-gle过了clc;clear;close all;
+clc;clear;close all;
 
 %% random test
 
