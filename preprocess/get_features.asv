@@ -35,8 +35,7 @@ size(segment.data)
 
 dlength = size(segment.data, 2);
 window_lengths = [80,160,240];
-window_lengths = ceil(window_lengths .* segment.sampling_frequency);
-window_lengths = window_lengths + mod(window_lengths,2);
+window_lengths = window_lengths .* segment
 max_window = max(window_lengths);
 min_window = min(window_lengths);
 
