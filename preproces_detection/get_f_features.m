@@ -65,9 +65,9 @@ function freq_feature_list = get_f_features(data, fs, plot_flag)
     % Number of Bands
     nBands = size(bLims,2);
     % Store the bands values
-    bands_value = zeros(nBands, 16, 'single');
+    bands_value = zeros(nBands, size(data,1), 'single');
     % Store the Max band value Per Channel
-    max_bands =  zeros(1, 16, 'single');
+    max_bands =  zeros(1, size(data,1), 'single');
     
     
     for c=1:size(filtered_fft, 1)
