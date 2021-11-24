@@ -1,4 +1,4 @@
-clc;clear;close all;
+gle过了clc;clear;close all;
 
 %% random test
 
@@ -46,7 +46,7 @@ clc;clear;close all;
 %% loop all files
 
 % change foldre before tun
-folder = "~/Downloads/seizure_pred/";
+folder = "/home/mhuan98/ml-project/Dog_1/Dog_1";
 
 % outfile_name = get_filename(folder,output,".csv");
 
