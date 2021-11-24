@@ -1,7 +1,7 @@
-function freq_feature_list = get_f_features(segment, plot_flag)
+function freq_feature_list = get_f_features(segment, dataseg, plot_flag)
     % Prepare the data and the sampling frequency
     fs = segment.sampling_frequency;
-    data = segment.data;
+    data = dataseg;
     nChans = size(segment.channels, 2);
     %% Compute the correlation features
     % 
