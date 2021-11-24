@@ -1,8 +1,6 @@
-function freq_feature_list = get_f_features(segment, dataseg, plot_flag)
+function freq_feature_list = get_f_features(data, fs, plot_flag)
     % Prepare the data and the sampling frequency
-    fs = segment.sampling_frequency;
-    data = dataseg;
-    nChans = size(segment.channels, 2);
+    nChans = size(data, 1);
     %% Compute the correlation features
     % 
     
@@ -13,7 +11,7 @@ function freq_feature_list = get_f_features(segment, dataseg, plot_flag)
     % Store the single side amplitude spectrum
     P1_data = zeros(nChans, size(data,2)/2+1, 'single');
     % Length of original data
-    L = size(dataseg,2);
+    L = size(data,2);
     
     parfor c=1:size(filtered_fft, 1)
         % Fourier transform
