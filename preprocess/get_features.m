@@ -43,8 +43,9 @@ for windowend=max_window:min_window:dlength
         dataseg = segment.data(:,windowend-window_len:windowend);
         dataseg = butterfiltfilt(dataseg,[1,50],segment.sampling_frequency);
         mCorrs_T = CorrelationTemp(dataseg);
+        freq_feature_list = get_f_feature(dataseg, segment.sampling_frequency, size(segment.channels, 2), plot_flag);
         % assign feature values to features.
-        features = [ictal, mCorrs_T];
+        features = [ictal, mCorrs_T, freq_feature_list];
         writematrix(features,outfile_name,'WriteMode','append')
     end
 end
@@ -52,9 +53,3 @@ end
 if plot_flag
 end
 residual_data = segment.data(:,windowend:end);
-
-    
-    
-
-
-% return features as a struct / vector

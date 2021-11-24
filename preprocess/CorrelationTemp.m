@@ -10,11 +10,11 @@ mCorrs_T(1,:) = mean(corrs);
 mCorrs_T(2,:) = std(corrs);
 mCorrs_T(3,:) = sum(corrs);
 mCorrs_T(4,:) = sum(abs(corrs));
-mCorrs_T(5,:) = D
+mCorrs_T(5,:) = D;
 
 
 %calculate summary feature
-mCorrs_T(6,:) = reshapemean(data);
+mCorrs_T(6,:) = mean(data);
 mCorrs_T(7,:) = mean(abs(data));
 mCorrs_T(8,:) = std(data);
 mCorrs_T(9,:) = sum(data);
