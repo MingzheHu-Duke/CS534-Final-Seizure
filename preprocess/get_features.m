@@ -45,7 +45,7 @@ for windowend=max_window:min_window:dlength
         mCorrs_T = CorrelationTemp(dataseg);
         freq_feature_list = get_f_feature(dataseg, segment.sampling_frequency, size(segment.channels, 2), plot_flag);
         % assign feature values to features.
-        features = [ictal, mCorrs_T, freq_feature_list];
+        features = [ictal, str2num(fname(end-7:end-4)), mCorrs_T, freq_feature_list];
         writematrix(features,outfile_name,'WriteMode','append')
     end
 end
