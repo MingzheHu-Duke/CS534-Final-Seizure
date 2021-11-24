@@ -29,7 +29,7 @@ if segment.sequence == 1
 end
 
 segment.data = [residual_data segment.data];
-
+size(segment.data)
 % TODO: get total number of feature
 % features = zeros([1,512]);
 
@@ -40,12 +40,12 @@ min_window = min(window_lengths);
 
 for windowend=max_window:min_window:dlength
     for window_len = window_lengths
-        dataseg = segment.data(:,windowend-window_len:windowend);
+        dataseg = segment.data(:,windowend-window_len+1:windowend);
         dataseg = butterfiltfilt(dataseg,[1,50],segment.sampling_frequency);
         mCorrs_T = CorrelationTemp(dataseg);
-        freq_feature_list = get_f_features(dataseg, segment.sampling_frequency, size(segment.channels, 2), plot_flag);
+%         freq_feature_list = get_f_features(dataseg, segment.sampling_frequency, size(segment.channels, 2), plot_flag);
         % assign feature values to features.
-        features = [ictal, str2num(fname(end-7:end-4)), mCorrs_T, freq_feature_list];
+        features = [ictal, str2num(fname(end-7:end-4)), mCorrs_T];
         writematrix(features,outfile_name,'WriteMode','append')
     end
 end
