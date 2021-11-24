@@ -13,7 +13,7 @@ function freq_feature_list = get_f_features(segment, dataseg, plot_flag)
     % Store the single side amplitude spectrum
     P1_data = zeros(nChans, size(data,2)/2+1, 'single');
     % Length of original data
-    L = size(segment.data,2);
+    L = size(dataseg,2);
     
     parfor c=1:size(filtered_fft, 1)
         % Fourier transform
