@@ -47,8 +47,11 @@ segment.data = butterfiltfilt(segment.data,[1,50],segment.freq);
 mCorrs_T = CorrelationTemp(segment.data);
 freq_feature_list = get_f_features(segment.data, segment.freq, plot_flag);
 
+if ~isfield(segment, 'latency')
+    segment.latency = 0;
+end
 % assign feature values to features.
-features = [ictal, fieldid, mCorrs_T, freq_feature_list];
+features = [ictal, fieldid, segment.latency, mCorrs_T, freq_feature_list];
 writematrix(features,outfile_name,'WriteMode','append');
 %     end
 % end
