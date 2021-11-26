@@ -78,6 +78,8 @@ def feature_selection(file_path, verbose=False, further=False):
     plt.title("Class Distribution")
     plt.show()
 
+  return X_data_reduced, y_data
+
 
 if __name__ == "__main__":
   feature_selection("/content/Dog_1.csv")
