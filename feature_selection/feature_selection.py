@@ -45,6 +45,7 @@ def feature_selection(file_path, verbose=False, further=False):
     v = 2
   else:
     v = 1
+
   clf = GridSearchCV(lsvc_op, parameters, verbose=v)
   clf.fit(X_data, y_data)
 
