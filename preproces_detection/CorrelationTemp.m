@@ -23,4 +23,4 @@ mCorrs_T(11,:) = kurtosis(data');
 mCorrs_T(12,:) = skewness(data');
 
 
-mCorrs_T = reshape(mCorrs_T,[1,192]);
+mCorrs_T = reshape(mCorrs_T,[1,12*size(data,1)]);

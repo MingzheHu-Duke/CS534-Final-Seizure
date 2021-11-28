@@ -46,7 +46,7 @@ clc;clear;close all;
 %% loop all files
 
 % change foldre before tun
-folder = '/Users/nigel/Downloads/seizure_detect/';
+folder = 'C:\FileStorage\SeizureDetection';
 
 % outfile_name = get_filename(folder,output,".csv");
 
