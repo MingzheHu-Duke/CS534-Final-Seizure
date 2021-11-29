@@ -13,10 +13,13 @@ from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn import metrics
+from sklearn import preprocessing
+from sklearn.metrics import roc_curve, auc
+import imblearn
 import warnings
 warnings.filterwarnings("ignore")
 
-def feature_selection(file_path, verbose=False, further=False):
+def feature_selection(file_path, verbose=False, further=True):
   """
   file_path: The path of the data for feature selection
   verbose: 1 if print the outputs
@@ -90,15 +93,43 @@ def feature_selection(file_path, verbose=False, further=False):
 
 if __name__ == "__main__":
   X, y = feature_selection("/home/mhuan98/ml-project/Patient_2/Patient_2.csv")
-  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-  clf=RandomForestClassifier(n_estimators=100)
-  clf.fit(X_train,y_train)
-  y_pred=clf.predict(X_test)
-  print('prediction, Patient_2')
-  print(classification_report(y_test, y_pred))
-  metrics.plot_roc_curve(clf, X_test, y_test)
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+  oversample = imblearn.over_sampling.SMOTE()
+  X_train, y_train = oversample.fit_resample(X_train, y_train)
+  train_scaler = preprocessing.StandardScaler().fit(X_train)
+  X_train = train_scaler.transform(X_train)
+  clf=RandomForestClassifier(max_features = "sqrt")
+  param_grid = {
+                 'n_estimators': [50,100,150,200],
+                 'max_depth': [1,2,3,4,5]
+             }
+  grid_clf = GridSearchCV(clf, param_grid, cv=5)
+  grid_clf.fit(X_train,y_train)
+  train_predict = grid_clf.predict(X_train)
+  test_predict = grid_clf.predict(X_test)
+  print("Training Performance Patient_2")
+  print(classification_report(y_train, train_predict, target_names=["Normal", "Siezure"]))
+  print("\n")
+  print("Test Performance Patient_2")
+  print(classification_report(y_test, test_predict, target_names=["Normal", "Siezure"]))
+
+
+  y_hat = grid_clf.predict_proba(X_test)[:, 1]
+  # Calculate the ROC Curves
+  fpr, tpr, thresholds = roc_curve(y_test, y_hat)
+  # Get the g-mean for each threshold
+  gmeans = np.sqrt(tpr * (1-fpr))
+  # Locate the index
+  ix = np.argmax(gmeans)
+
+  fig, ax = plt.subplots(figsize=(8, 8))
+  metrics.plot_roc_curve(grid_clf, X_test, y_test, ax=ax)
+  ax.plot([0,1], [0,1], linestyle='--', label='No Skill')
+  ax.scatter(fpr[ix], tpr[ix], marker='o', color='red', label='Best')
+  ax.set_title("Test ROC Curve\nRandom Forest")
   plt.savefig('prediction_Patient_2_roc.png')
 
-
+  print("Test Performance Patient_2")
+  print(classification_report(y_test, (grid_clf.predict_proba(X_test)[:,1] >= thresholds[ix]).astype(bool), target_names=["Normal", "Siezure"]))
 
 
