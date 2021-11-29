@@ -93,11 +93,12 @@ def feature_selection(file_path, verbose=False, further=True):
 
 if __name__ == "__main__":
   X, y = feature_selection("/home/mhuan98/ml-project/Patient_2/Patient_2.csv")
-  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle = True)
   oversample = imblearn.over_sampling.SMOTE()
   X_train, y_train = oversample.fit_resample(X_train, y_train)
   train_scaler = preprocessing.StandardScaler().fit(X_train)
   X_train = train_scaler.transform(X_train)
+  X_test = train_scaler.transform(X_test)
   clf=RandomForestClassifier(max_features = "sqrt")
   param_grid = {
                  'n_estimators': [50,100,150,200],
